@@ -1,1 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The True Cost of Your Digital Signage | ScreenCloud & Ole Miss</title>
+    <style>
+        /* CSS for styling the application */
+        :root {
+            --primary-color: #00205B; /* Ole Miss Navy */
+            --secondary-color: #E21D35; /* Ole Miss Red */
+            --text-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --font-family: 'Arial', sans-serif;
+        }
 
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-bottom: 5px solid var(--secondary-color);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .section {
+            background: var(--white);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 10px;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+        }
+
+        /* TCO Calculator Styles */
+        .tco-calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .tco-inputs, .tco-results {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .tco-inputs h3, .tco-results h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .result-bar-container {
+            margin-top: 20px;
+        }
+
+        .result-bar {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .bar {
+            height: 30px;
+            line-height: 30px;
+            color: white;
+            padding-left: 10px;
+            white-space: nowrap;
+            transition: width 0.5s ease-in-out;
+            text-align: right;
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .screencloud-bar { background-color: var(--primary-color); }
+        .risevision-bar { background-color: var(--secondary-color); }
+
+        .total-cost { font-weight: bold; font-size: 1.2rem; }
+
+        /* Persona Section Styles */
+        .personas {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .persona-card {
+            background-color: var(--light-gray);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 30%;
+            min-width: 250px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .persona-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .persona-card h3 svg {
+            margin-right: 10px;
+        }
+        
+        .persona-card ul {
+            padding-left: 20px;
+        }
+        
+        .persona-card li {
+            margin-bottom: 10px;
+        }
+
+        /* Final CTA */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #c81a2d;
+        }
+
+        @media (max-width: 768px) {
+            .tco-calculator {
+                grid-template-columns: 1fr;
+            }
+            .personas {
+                flex-direction: column;
+            }
+            .persona-card {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://logowik.com/content/uploads/images/ole-miss-rebels4779.logowik.com.webp" alt="Ole Miss Logo" style="width:100px; height:auto; margin-bottom: 20px;">
+        <h1>Beyond the Initial Quote: A Partnership for the Future</h1>
+        <p>For the Director of HR Systems & Decision Makers at The University of Mississippi</p>
+    </div>
+
+    <div class="container">
+
+        <div class="section intro">
+            <h2>Understanding the True Cost of Digital Signage</h2>
+            <p>We understand that the initial quote is a critical factor in any decision. While Rise Vision presented a lower upfront cost ($18,000) compared to ScreenCloud ($63,000), we want to provide a clearer picture of the <strong>Total Cost of Ownership (TCO)</strong>. A truly scalable and reliable digital signage solution involves more than just the initial price—it's about long-term value, efficiency, and future-proofing your investment.</p>
+            <p>This interactive guide is designed to help your key departments—HR, IT, Comms, and Procurement—visualize the hidden costs and understand why ScreenCloud is the more cost-effective and strategic choice for Ole Miss in the long run.</p>
+        </div>
+
+        <div class="section">
+            <h2>Interactive 3-Year TCO Calculator</h2>
+            <p>Use the sliders below to estimate your internal costs. The calculator will reveal how quickly a "budget" solution's operational costs can eclipse initial savings. We've pre-filled some industry-standard estimates based on our research.</p>
+            <div class="tco-calculator">
+                <div class="tco-inputs">
+                    <h3>Your University's Estimates</h3>
+                    <div class="form-group">
+                        <label for="numScreens">Number of Digital Screens</label>
+                        <input type="range" id="numScreens" min="10" max="500" value="100" oninput="this.nextElementSibling.value = this.value; calculateTCO();">
+                        <output>100</output> screens
+                    </div>
+                    <div class="form-group">
+                        <label for="itRate">IT Staff Hourly Rate ($)</label>
+                        <input type="range" id="itRate" min="25" max="100" value="45" oninput="this.nextElementSibling.value = this.value; calculateTCO();">
+                        <output>45</output> $/hour
+                    </div>
+                    <div class="form-group">
+                        <label for="commsRate">HR/Comms Staff Hourly Rate ($)</label>
+                        <input type="range" id="commsRate" min="20" max="80" value="35" oninput="this.nextElementSibling.value = this.value; calculateTCO();">
+                        <output>35</output> $/hour
+                    </div>
+                    <div class="form-group">
+                        <label for="itHours">Monthly IT Maintenance/Troubleshooting per Screen (Hours)</label>
+                        <input type="range" id="itHours" min="0.1" max="2" value="0.5" step="0.1" oninput="this.nextElementSibling.value = this.value; calculateTCO();">
+                        <output>0.5</output> hours
+                    </div>
+                     <div class="form-group">
+                        <label for="contentHours">Weekly Hours Spent by Staff on Content Creation/Management</label>
+                        <input type="range" id="contentHours" min="1" max="40" value="10" oninput="this.nextElementSibling.value = this.value; calculateTCO();">
+                        <output>10</output> hours
+                    </div>
+                </div>
+                <div class="tco-results">
+                    <h3>Projected 3-Year Total Cost</h3>
+                    <div>
+                        <strong>ScreenCloud</strong>
+                        <div class="result-bar">
+                            <div id="screencloudBar" class="bar screencloud-bar"></div>
+                        </div>
+                        <p id="screencloudTotal" class="total-cost">$0</p>
+                    </div>
+                    <div class="result-bar-container">
+                        <strong>Rise Vision (with estimated operational costs)</strong>
+                        <div class="result-bar">
+                            <div id="risevisionBar" class="bar risevision-bar"></div>
+                        </div>
+                        <p id="risevisionTotal" class="total-cost">$0</p>
+                    </div>
+                    <p id="tcoDifference" style="margin-top: 20px; font-weight: bold; color: var(--primary-color);"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Why This Matters to Your Team</h2>
+            <p>A digital signage solution impacts multiple departments. Here’s how ScreenCloud provides superior value to each key stakeholder at Ole Miss.</p>
+            <div class="personas">
+                <div class="persona-card">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        For HR & Communications
+                    </h3>
+                    <ul>
+                        <li><strong>Effortless Content:</strong> Our AI-first platform, Pulse, automates content creation, saving your team hours each week. Less time building slides, more time on strategic communication.</li>
+                        <li><strong>Campus-Wide Engagement:</strong> Easily manage and schedule content for every department, from athletics to the student union, ensuring consistent and engaging messaging.</li>
+                        <li><strong>Emergency Alerts:</strong> Instantly override screens with critical safety information, a feature that requires reliability you can trust.</li>
+                    </ul>
+                </div>
+                <div class="persona-card">
+                    <h3>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        For IT & Systems
+                    </h3>
+                    <ul>
+                        <li><strong>Hardware Agnostic:</strong> ScreenCloud works with a wide variety of hardware, preventing vendor lock-in and reducing replacement costs. Rise Vision's solution often relies on their own less reliable, proprietary hardware.</li>
+                        <li><strong>Reduced Maintenance:</strong> A stable, enterprise-grade platform means fewer support tickets and less time spent troubleshooting frozen or malfunctioning screens.</li>
+                        <li><strong>Seamless Integration:</strong> Our solutions engineers can build custom integrations with existing university systems (like your HRIS or emergency alert system), a service not offered by budget providers.</li>
+                    </ul>
+                </div>
+                <div class="persona-card">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        For Procurement
+                    </h3>
+                    <ul>
+                        <li><strong>Lower TCO:</strong> As the calculator shows, the lower operational costs in IT and content management lead to significant long-term savings that outweigh the higher initial investment.</li>
+                        <li><strong>Scalability:</strong> ScreenCloud is built to grow with Ole Miss. You won't need to reinvest in a new system when your needs become more complex.</li>
+                        <li><strong>True Partnership:</strong> The initial quote includes access to professional services and solutions engineering, ensuring the platform is perfectly tailored to your needs from day one. This isn't just a product; it's a fully supported solution.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section footer">
+            <h2>Ready to Re-evaluate?</h2>
+            <p>We are confident that ScreenCloud offers the University of Mississippi a more powerful, reliable, and ultimately more cost-effective solution. Let's schedule a brief call to build a personalized TCO model based on your exact departmental data.</p>
+            <a href="mailto:your_email@screencloud.com?subject=Re: Ole Miss Digital Signage Proposal" class="cta-button">Schedule a TCO Deep Dive</a>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript for the TCO Calculator
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+        }
+
+        function calculateTCO() {
+            // Get values from inputs
+            const numScreens = parseInt(document.getElementById('numScreens').value);
+            const itRate = parseInt(document.getElementById('itRate').value);
+            const commsRate = parseInt(document.getElementById('commsRate').value);
+            const itHoursPerScreen = parseFloat(document.getElementById('itHours').value);
+            const contentHoursWeekly = parseInt(document.getElementById('contentHours').value);
+
+            // Initial Quotes
+            const screencloudInitialQuote = 63000;
+            const risevisionInitialQuote = 18000;
+
+            // Assumptions based on provided documents
+            // Rise Vision: Higher IT maintenance due to less reliable hardware, more time on content due to basic tools.
+            const risevisionItMultiplier = 1.0; // Assume the slider value is for a budget system
+            const risevisionContentMultiplier = 1.0; 
+            
+            // ScreenCloud: Lower IT maintenance and faster content creation.
+            const screencloudItMultiplier = 0.25; // 75% less time on maintenance
+            const screencloudContentMultiplier = 0.5; // 50% less time on content creation (AI-assist)
+
+            // Calculate annual operational costs
+            const annualItCostRiseVision = numScreens * itHoursPerScreen * itRate * 12 * risevisionItMultiplier;
+            const annualContentCostRiseVision = contentHoursWeekly * 52 * commsRate * risevisionContentMultiplier;
+            
+            const annualItCostScreenCloud = numScreens * itHoursPerScreen * itRate * 12 * screencloudItMultiplier;
+            const annualContentCostScreenCloud = contentHoursWeekly * 52 * commsRate * screencloudContentMultiplier;
+
+            // Calculate 3-Year TCO
+            const tcoRiseVision = risevisionInitialQuote + (annualItCostRiseVision * 3) + (annualContentCostRiseVision * 3);
+            const tcoScreenCloud = screencloudInitialQuote + (annualItCostScreenCloud * 3) + (annualContentCostScreenCloud * 3);
+
+            // Update the display
+            document.getElementById('risevisionTotal').textContent = formatCurrency(tcoRiseVision);
+            document.getElementById('screencloudTotal').textContent = formatCurrency(tcoScreenCloud);
+            
+            // Update the bars
+            const maxTCO = Math.max(tcoScreenCloud, tcoRiseVision, 1);
+            const screencloudBarWidth = (tcoScreenCloud / maxTCO) * 100;
+            const risevisionBarWidth = (tcoRiseVision / maxTCO) * 100;
+
+            document.getElementById('screencloudBar').style.width = screencloudBarWidth + '%';
+            document.getElementById('screencloudBar').textContent = formatCurrency(tcoScreenCloud);
+            document.getElementById('risevisionBar').style.width = risevisionBarWidth + '%';
+            document.getElementById('risevisionBar').textContent = formatCurrency(tcoRiseVision);
+
+            // Update difference text
+            const difference = Math.abs(tcoScreenCloud - tcoRiseVision);
+            if (tcoScreenCloud < tcoRiseVision) {
+                document.getElementById('tcoDifference').textContent = `ScreenCloud is projected to be ${formatCurrency(difference)} less expensive over 3 years.`;
+            } else {
+                document.getElementById('tcoDifference').textContent = `Rise Vision is projected to be ${formatCurrency(difference)} less expensive over 3 years, but with significant trade-offs in capability and reliability.`;
+            }
+        }
+
+        // Initial calculation on page load
+        document.addEventListener('DOMContentLoaded', calculateTCO);
+    </script>
+</body>
+</html>
